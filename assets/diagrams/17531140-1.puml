@@ -1,0 +1,12 @@
+@startuml
+autonumber
+actor "Клиент API" as FE
+participant "Backend API" as API
+database "БД" as DB
+
+FE -> API : GET /api/boards
+API -> API : Проверить JWT и получить пользователя
+API -> DB : Найти доски владельца или участника\nи загрузить колонки
+DB --> API : Данные досок
+API --> FE : 200 + массив TaskBoardModel
+@enduml

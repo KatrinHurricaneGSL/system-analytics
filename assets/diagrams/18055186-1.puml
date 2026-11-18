@@ -1,0 +1,29 @@
+@startuml
+autonumber
+actor "Frontend" as FE
+participant "Backend API" as API
+database "БД" as DB
+
+FE -> API : PUT /api/projects/{projectId}/members\n{memberUserIds}
+API -> API : Проверить JWT и право project:access
+API -> DB : Проверить проект и роль manager
+DB --> API : Результат проверки
+
+alt Проект не найден
+  API --> FE : 404 + {message}
+else Пользователь не менеджер проекта
+  API --> FE : 403 + {message}
+else Доступ разрешен
+  API -> API : Удалить повторные и неположительные ID
+  API -> DB : Проверить выбранные учетные записи
+  DB --> API : Результат проверки
+
+  alt Есть неизвестные пользователи
+    API --> FE : 404 + {message}
+  else Проверки пройдены
+    API -> DB : Обновить состав сотрудников,\nсохранить действующих менеджеров
+    DB --> API : Обновленный список участников
+    API --> FE : 200 + массив участников
+  end
+end
+@enduml

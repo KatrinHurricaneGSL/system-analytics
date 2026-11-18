@@ -1,0 +1,12 @@
+@startuml
+autonumber
+actor "Frontend" as FE
+participant "Backend API" as API
+database "БД" as DB
+
+FE -> API : GET /api/project-charters/{id}/versions
+API -> API : Проверить JWT и право доступа
+API -> DB : Получить версии устава
+DB --> API : Данные версий
+API --> FE : 200 + массив версий
+@enduml

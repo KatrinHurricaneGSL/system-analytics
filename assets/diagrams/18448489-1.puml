@@ -1,0 +1,25 @@
+@startuml
+autonumber
+actor "Frontend" as FE
+participant "Backend API" as API
+database "БД" as DB
+
+FE -> API : PUT /api/tasks/{id} + JSON
+API -> API : Проверить JWT, kanban:edit_card\nи входные данные
+
+alt Ошибка валидации
+  API --> FE : 400 + ошибка валидации
+else Данные корректны
+  API -> DB : Найти задачу
+  DB --> API : Результат поиска
+  API -> DB : Обновить сведения, исполнителей\nи зависимости
+  DB --> API : Результат сохранения
+  API -> DB : Сохранить трудозатраты\nи связи со статьями
+  DB --> API : Результат сохранения
+  API -> DB : Обновить нормативные требования\nи синхронизировать матрицу проекта
+  DB --> API : Результат сохранения
+  API -> DB : Записать действие обновления
+  DB --> API : Результат сохранения
+  API --> FE : 204 No Content
+end
+@enduml

@@ -1,0 +1,20 @@
+@startuml
+autonumber
+actor "Клиент API" as FE
+participant "Backend API" as API
+database "БД" as DB
+
+FE -> API : GET /api/projects/{id}
+API -> API : Проверить JWT и право project:access
+API -> DB : Найти проект и проверить членство
+DB --> API : Результат проверки
+
+alt Проект не найден
+  API --> FE : 404 + {message}
+else Нет членства и права project:create
+  API --> FE : 403 + {message}
+else Доступ разрешен
+  API -> API : Определить роль и права пользователя
+  API --> FE : 200 + карточка проекта
+end
+@enduml

@@ -1,0 +1,12 @@
+@startuml
+autonumber
+actor "Клиент API" as FE
+participant "Backend API" as API
+database "БД" as DB
+
+FE -> API : GET /api/tasks/column/{columnId}
+API -> API : Проверить JWT и kanban:access
+API -> DB : Получить задачи по TaskColumnId\nвместе с исполнителями
+DB --> API : Список TaskCardModel
+API --> FE : 200 OK + TaskCardModel[]
+@enduml

@@ -1,0 +1,35 @@
+@startuml
+autonumber
+title Отправка устава на согласование
+
+actor "Пользователь" as User
+participant "Frontend" as FE
+participant "Backend API" as API
+database "База данных" as DB
+
+User -> FE : Отправить устав
+FE -> API : POST /project-charters/{id}/submit
+
+API -> API : Проверить JWT, права,\nвалидность запроса
+
+alt Ошибка входных проверок
+    API --> FE : 400 / 401 / 403
+    FE --> User : Показать ошибку
+else Проверки пройдены
+    API -> DB : Получить устав и маршрут
+    DB --> API : Данные устава
+
+    API -> API : Проверить условия отправки
+
+    alt Устав не найден
+        API --> FE : 404 Not Found
+    else Отправка запрещена
+        API --> FE : 400 Bad Request
+    else Отправка разрешена
+        API -> DB : Обновить статусы устава\nи маршрута, сохранить журнал
+        DB --> API : Результат сохранения
+        API --> FE : 200 OK + ProjectCharterDetailsDto
+        FE --> User : Устав отправлен
+    end
+end
+@enduml

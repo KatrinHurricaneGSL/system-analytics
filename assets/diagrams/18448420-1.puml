@@ -1,0 +1,23 @@
+@startuml
+autonumber
+actor "Frontend" as FE
+participant "Backend API" as API
+database "БД" as DB
+
+FE -> API : POST /api/boards/{boardId}/columns + JSON
+API -> API : Проверить JWT и входные данные
+API -> DB : Найти доску
+DB --> API : Результат поиска
+
+alt Доска не найдена
+  API --> FE : Необработанная ошибка
+else Доска найдена
+  opt Новая колонка завершающая
+    API -> DB : Снять завершающий признак\nс существующих колонок
+    DB --> API : Результат сохранения
+  end
+  API -> DB : Добавить новую колонку
+  DB --> API : Результат сохранения
+  API --> FE : 204 No Content
+end
+@enduml

@@ -1,0 +1,23 @@
+@startuml
+autonumber
+actor "Frontend" as FE
+participant "Backend API" as API
+database "БД" as DB
+
+FE -> API : GET /api/boards/{id}
+API -> API : Проверить JWT, id и параметр filter
+
+alt Некорректные параметры
+  API --> FE : 400 + {message}
+else Параметры корректны
+  API -> DB : Получить доску, колонки,\nучастников и неархивные задачи
+  DB --> API : Результат поиска
+
+  alt Доска не найдена
+    API --> FE : 404 + {message}
+  else Доска найдена
+    API -> API : Применить поиск и сортировку\nРассчитать признаки задач
+    API --> FE : 200 + TaskBoardDto
+  end
+end
+@enduml

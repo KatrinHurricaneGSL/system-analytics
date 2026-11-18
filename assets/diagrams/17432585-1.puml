@@ -1,0 +1,21 @@
+@startuml
+autonumber
+actor "Frontend" as FE
+participant "Backend API" as API
+database "БД" as DB
+
+FE -> API : POST /api/project-charters/{id}/submit\n{comment}
+API -> API : Проверить JWT, право и комментарий
+API -> DB : Получить устав и маршрут
+DB --> API : Данные устава и маршрута
+
+alt Устав не найден
+  API --> FE : 404
+else Маршрут пуст или устав уже submitted
+  API --> FE : 400 + {message}
+else Отправка разрешена
+  API -> DB : Сбросить решения, активировать первый шаг,\nсохранить новую версию и события журнала
+  DB --> API : Обновленная карточка
+  API --> FE : 200 + карточка
+end
+@enduml

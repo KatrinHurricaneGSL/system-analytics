@@ -1,0 +1,15 @@
+@startuml
+autonumber
+actor "Frontend" as FE
+participant "Backend API" as API
+database "БД" as DB
+
+FE -> API : PUT /api/boards/{id}/columns/reorder + JSON
+API -> API : Проверить JWT
+API -> DB : Получить колонки доски
+DB --> API : Список колонок
+API -> API : Определить новые индексы колонок
+API -> DB : Сохранить порядок колонок
+DB --> API : Результат сохранения
+API --> FE : 204 No Content
+@enduml

@@ -1,0 +1,12 @@
+@startuml
+autonumber
+actor "Frontend" as FE
+participant "Backend API" as API
+database "БД" as DB
+
+FE -> API : GET /api/project-charters/users
+API -> API : Проверить JWT и право доступа
+API -> DB : Получить учетные записи пользователей
+DB --> API : Данные пользователей
+API --> FE : 200 + массив пользователей
+@enduml

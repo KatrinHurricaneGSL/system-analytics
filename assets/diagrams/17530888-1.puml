@@ -1,0 +1,21 @@
+@startuml
+autonumber
+actor "Frontend" as FE
+participant "Backend API" as API
+database "БД" as DB
+
+FE -> API : PUT /api/project-charters/{id} + данные
+API -> API : Проверить JWT, право, поля и совпадение ID
+API -> DB : Проверить связанные записи и найти устав
+DB --> API : Результат проверки
+
+alt Данные некорректны
+  API --> FE : 400 + {message}
+else Устав не найден
+  API --> FE : 404
+else Изменение разрешено
+  API -> DB : Обновить устав, заменить связанные данные,\nсохранить новую версию и событие журнала
+  DB --> API : Обновленная карточка
+  API --> FE : 200 + карточка
+end
+@enduml

@@ -1,0 +1,18 @@
+@startuml
+autonumber
+actor "Frontend" as FE
+participant "Backend API" as API
+database "БД" as DB
+
+FE -> API : GET /api/boards/{id}/analytics
+API -> API : Проверить JWT
+API -> DB : Получить доску и неархивные задачи
+DB --> API : Данные доски и задач
+
+alt Ошибка обработки
+  API --> FE : 404 + {message}
+else Успех
+  API -> API : Рассчитать показатели
+  API --> FE : 200 + TaskBoardAnalyticsDto
+end
+@enduml

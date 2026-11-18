@@ -1,0 +1,12 @@
+@startuml
+autonumber
+actor "Frontend" as FE
+participant "Backend API" as API
+database "БД" as DB
+
+FE -> API : GET /api/project-charters/{id}/approval-flow
+API -> API : Проверить JWT и право доступа
+API -> DB : Получить шаги и имена согласующих
+DB --> API : Данные маршрута
+API --> FE : 200 + массив шагов
+@enduml

@@ -1,0 +1,20 @@
+@startuml
+autonumber
+actor "Клиент API" as FE
+participant "Backend API" as API
+
+FE -> API : GET /api/boards/admin-only
+API -> API : Проверить JWT
+
+alt Пользователь не авторизован
+  API --> FE : 401 Unauthorized
+else Пользователь авторизован
+  API -> API : Проверить MinAccessLevel(4)
+
+  alt Уровень доступа меньше 4
+    API --> FE : 403 Forbidden + {message}
+  else Доступ разрешен
+    API --> FE : 200 OK + строка
+  end
+end
+@enduml

@@ -1,0 +1,17 @@
+@startuml
+autonumber
+actor "Frontend" as FE
+participant "Backend API" as API
+database "БД" as DB
+FE -> API : POST /api/project-charters/{id}/comments\n{text}
+API -> API : Проверить JWT, право и непустой текст
+API -> DB : Найти устав
+DB --> API : Результат
+alt Нет устава
+  API --> FE : 404
+else Устав найден
+  API -> DB : Сохранить комментарий и comment_added
+  DB --> API : Комментарий с автором
+  API --> FE : 200 + комментарий
+end
+@enduml

@@ -1,0 +1,29 @@
+@startuml
+autonumber
+actor "Frontend" as FE
+participant "Backend API" as API
+database "БД" as DB
+
+FE -> API : PUT /api/tasks/{id}/move + JSON
+API -> API : Проверить JWT и kanban:move_card
+API -> DB : Найти задачу и текущего пользователя
+DB --> API : Данные задачи и пользователя
+API -> API : Проверить авторство, назначение\nили Role.AccessLevel >= 3
+API -> DB : Найти целевую колонку
+DB --> API : Данные колонки
+
+opt Целевая колонка завершающая
+  API -> DB : Проверить зависимости\nи нормативные ограничения
+  DB --> API : Результат проверок
+end
+
+alt Ошибка проверки или выполнения
+  API --> FE : 400 + {message}
+else Успех
+  API -> DB : Изменить TaskColumnId и IsClosed
+  DB --> API : Результат сохранения
+  API -> DB : Записать действие перемещения
+  DB --> API : Результат сохранения
+  API --> FE : 204 No Content
+end
+@enduml

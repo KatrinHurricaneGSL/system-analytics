@@ -1,0 +1,22 @@
+@startuml
+autonumber
+actor "Frontend" as FE
+participant "Backend API" as API
+database "БД" as DB
+
+FE -> API : PUT /api/boards/columns/{columnId} + JSON
+API -> API : Проверить JWT и входные данные
+API -> DB : Найти колонку
+DB --> API : Результат поиска
+
+alt Колонка не найдена
+  API --> FE : Необработанная ошибка
+else Колонка найдена
+  opt Колонка становится завершающей
+    API -> DB : Снять завершающий признак\nс других колонок доски
+  end
+  API -> DB : Обновить название, признак колонки\nи состояние неархивных задач
+  DB --> API : Результат сохранения
+  API --> FE : 204 No Content
+end
+@enduml

@@ -1,0 +1,24 @@
+@startuml
+autonumber
+actor "Клиент API" as FE
+participant "Backend API" as API
+database "БД" as DB
+
+FE -> API : DELETE /api/projects/{id}
+API -> API : Проверить JWT и право project:delete
+API -> DB : Найти проект
+DB --> API : Результат поиска
+
+alt Проект не найден
+  API --> FE : 404 + {message}
+else Проект найден
+  API -> DB : Удалить проект и сохранить изменения
+  DB --> API : Результат удаления
+
+  alt Удаление запрещено связями БД
+    API --> FE : Серверная ошибка
+  else Удаление выполнено
+    API --> FE : 204 No Content
+  end
+end
+@enduml

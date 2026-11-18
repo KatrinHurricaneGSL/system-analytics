@@ -1,0 +1,17 @@
+@startuml
+autonumber
+actor "Frontend" as FE
+participant "Backend API" as API
+database "БД" as DB
+
+FE -> API : GET /api/boards/{id}/archive
+API -> API : Проверить JWT
+API -> DB : Получить доску, колонки\nи архивированные задачи
+DB --> API : Результат поиска
+
+alt Ошибка обработки
+  API --> FE : 404 + {message}
+else Успех
+  API --> FE : 200 + архив доски
+end
+@enduml

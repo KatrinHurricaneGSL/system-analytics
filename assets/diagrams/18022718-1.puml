@@ -1,0 +1,23 @@
+@startuml
+autonumber
+actor "Frontend" as FE
+participant "Backend API" as API
+database "БД" as DB
+
+FE -> API : POST /api/tasks + JSON
+API -> API : Проверить JWT, kanban:edit_card\nи входные данные
+
+alt Ошибка валидации
+  API --> FE : 400 + ошибка валидации
+else Данные корректны
+  API -> DB : Найти колонку
+  DB --> API : Результат поиска
+  API -> DB : Создать задачу
+  DB --> API : Идентификатор задачи
+  API -> DB : Сохранить нормативные связи\nи синхронизировать матрицу
+  DB --> API : Результат сохранения
+  API -> DB : Записать действие создания\nи получить TaskCardDto
+  DB --> API : Данные задачи
+  API --> FE : 201 Created + TaskCardDto\nLocation
+end
+@enduml

@@ -1,0 +1,19 @@
+@startuml
+autonumber
+actor "Frontend" as FE
+participant "Backend API" as API
+database "БД" as DB
+
+FE -> API : DELETE /api/boards/columns/{columnId}
+API -> API : Проверить JWT
+API -> DB : Найти колонку
+DB --> API : Результат поиска
+
+alt Колонка не найдена
+  API --> FE : Необработанная ошибка
+else Колонка найдена
+  API -> DB : Удалить колонку и связанные данные
+  DB --> API : Результат удаления
+  API --> FE : 204 No Content
+end
+@enduml

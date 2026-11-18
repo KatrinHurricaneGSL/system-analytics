@@ -1,0 +1,12 @@
+@startuml
+autonumber
+actor "Frontend" as FE
+participant "Backend API" as API
+database "БД" as DB
+
+FE -> API : GET /api/project-charters/{id}/approval-journal
+API -> API : Проверить JWT и право доступа
+API -> DB : Получить события журнала и имена участников
+DB --> API : Данные журнала
+API --> FE : 200 + массив событий
+@enduml

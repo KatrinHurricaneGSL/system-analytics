@@ -1,0 +1,19 @@
+@startuml
+autonumber
+actor "Frontend" as FE
+participant "Backend API" as API
+database "БД" as DB
+
+FE -> API : POST /api/project-charters + данные
+API -> API : Проверить JWT, права и обязательные поля
+API -> DB : Проверить связанные записи
+DB --> API : Результат проверки
+
+alt Данные некорректны
+  API --> FE : 400 + {message}
+else Проверки пройдены
+  API -> DB : Создать устав с версией 1,\nсохранить связанные данные и событие журнала
+  DB --> API : Созданная карточка устава
+  API --> FE : 201 + карточка и Location
+end
+@enduml

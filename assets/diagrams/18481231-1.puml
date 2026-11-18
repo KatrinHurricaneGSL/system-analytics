@@ -1,0 +1,31 @@
+@startuml
+autonumber
+actor "Клиент API" as FE
+participant "Backend API" as API
+database "БД" as DB
+
+FE -> API : DELETE /api/boards/{boardId}/members/{userId}
+API -> API : Проверить JWT
+API -> DB : Найти доску
+DB --> API : Результат поиска
+
+alt Доска не найдена
+  API --> FE : Необработанная ошибка
+else Доска найдена
+  API -> API : Проверить владельца доски
+
+  alt Пользователь не владелец
+    API --> FE : Необработанная ошибка
+  else Доступ разрешен
+    API -> DB : Найти связь в board_users
+    DB --> API : Результат поиска
+
+    opt Связь существует
+      API -> DB : Удалить связь пользователя с доской
+      DB --> API : Результат сохранения
+    end
+
+    API --> FE : 204 No Content
+  end
+end
+@enduml

@@ -1,0 +1,12 @@
+@startuml
+autonumber
+actor "Frontend" as FE
+participant "Backend API" as API
+database "БД" as DB
+
+FE -> API : GET /api/project-charters/{id}/comments
+API -> API : Проверить JWT и право доступа
+API -> DB : Получить комментарии и имена авторов
+DB --> API : Данные комментариев
+API --> FE : 200 + массив комментариев
+@enduml

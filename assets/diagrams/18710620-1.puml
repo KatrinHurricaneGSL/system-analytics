@@ -1,0 +1,20 @@
+@startuml
+autonumber
+actor "Frontend" as FE
+participant "Backend API" as API
+database "БД" as DB
+
+FE -> API : GET /api/tasks/{id}
+API -> API : Проверить JWT и kanban:access
+API -> DB : Найти задачу по ID
+DB --> API : Результат поиска
+
+alt Задача не найдена или ошибка чтения
+  API --> FE : 400 + {message}
+else Задача найдена
+  API -> DB : Загрузить исполнителей, зависимости,\nстатьи и нормативные требования
+  DB --> API : Связанные данные
+  API -> API : Собрать требования родительских задач\nи исключить дубликаты
+  API --> FE : 200 OK + TaskCardDto
+end
+@enduml

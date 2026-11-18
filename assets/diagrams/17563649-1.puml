@@ -1,0 +1,17 @@
+@startuml
+autonumber
+actor "Frontend" as FE
+participant "Backend API" as API
+database "БД" as DB
+
+FE -> API : GET /api/project-charters/{id}
+API -> API : Проверить JWT и право доступа
+API -> DB : Получить устав и связанные данные
+DB --> API : Результат поиска
+
+alt Устав найден
+  API --> FE : 200 + карточка устава
+else Устав не найден
+  API --> FE : 404
+end
+@enduml

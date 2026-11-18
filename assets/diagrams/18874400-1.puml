@@ -1,0 +1,32 @@
+@startuml
+autonumber
+actor "Клиент API" as FE
+participant "Backend API" as API
+database "БД" as DB
+
+FE -> API : POST /api/boards/{boardId}/members + JSON
+API -> API : Проверить JWT
+API -> DB : Найти доску
+DB --> API : Результат поиска
+
+alt Доска не найдена
+  API --> FE : Необработанная ошибка
+else Доска найдена
+  API -> API : Проверить владельца доски
+
+  alt Пользователь не владелец
+    API --> FE : Необработанная ошибка
+  else Доступ разрешен
+    API -> DB : Проверить существование пользователя
+    DB --> API : Результат поиска
+
+    alt Пользователь не найден
+      API --> FE : Необработанная ошибка
+    else Пользователь найден
+      API -> DB : Добавить запись в board_users
+      DB --> API : Результат сохранения
+      API --> FE : 204 No Content
+    end
+  end
+end
+@enduml

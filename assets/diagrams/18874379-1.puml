@@ -1,0 +1,26 @@
+@startuml
+autonumber
+actor "Frontend" as FE
+participant "Backend API" as API
+database "БД" as DB
+
+FE -> API : POST /api/boards + JSON
+API -> API : Проверить JWT и входные данные
+
+alt Некорректные параметры
+  API --> FE : 400 + ошибка
+else Проверки пройдены
+  API -> DB : Найти владельца, проект\nи организацию
+  DB --> API : Результат поиска
+
+  alt Проект не найден
+    API --> FE : 404 + {message}
+  else Данные найдены
+    API -> DB : Создать доску и добавить владельца\nв участники
+    DB --> API : Созданная доска
+    API -> DB : Создать три начальные колонки
+    DB --> API : Результат сохранения
+    API --> FE : 201 + результат и Location
+  end
+end
+@enduml

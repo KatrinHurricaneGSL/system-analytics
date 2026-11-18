@@ -1,0 +1,29 @@
+@startuml
+autonumber
+actor "Frontend" as FE
+participant "Backend API" as API
+database "БД" as DB
+
+FE -> API : POST /api/project-charters/{id}/approve\n{comment?}
+API -> API : Проверить JWT и право согласования
+API -> DB : Получить устав и маршрут
+DB --> API : Данные устава и маршрута
+
+alt Устав не найден
+  API --> FE : 404
+else Устав не на согласовании,\nнет активного шага или другой согласующий
+  API --> FE : 400 + {message}
+else Согласование разрешено
+  API -> API : Завершить текущий шаг
+
+  alt Есть следующий шаг
+    API -> API : Активировать следующий шаг\nСохранить статус submitted
+  else Последний шаг
+    API -> API : Установить статус approved
+  end
+
+  API -> DB : Сохранить решение, новую версию\nи события журнала
+  DB --> API : Обновленная карточка
+  API --> FE : 200 + карточка
+end
+@enduml

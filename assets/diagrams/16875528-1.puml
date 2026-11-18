@@ -1,0 +1,35 @@
+@startuml
+autonumber
+actor "Frontend" as FE
+participant "Backend API" as API
+database "БД" as DB
+
+FE -> API : POST /api/project-charters/{id}/create-project
+API -> API : Проверить JWT и право project:create
+API -> DB : Получить устав
+DB --> API : Данные устава
+
+alt Устав не найден
+  API --> FE : 404 + {code, message}
+else Условия создания не выполнены
+  API --> FE : 400 + {code, message}
+else Создание разрешено
+  group Транзакция
+    API -> DB : Создать проект и назначить менеджера
+
+    opt Выбран шаблон
+      API -> API : Проверить шаблон
+      API -> DB : Создать доску и применить шаблон
+    end
+
+    alt Ошибка создания
+      API -> DB : Откатить изменения
+      API --> FE : Ошибка создания
+    else Успех
+      API -> DB : Связать проект с уставом\nи завершить транзакцию
+      DB --> API : Результат создания
+      API --> FE : 201 + результат и Location
+    end
+  end
+end
+@enduml
