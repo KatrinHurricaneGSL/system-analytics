@@ -1,0 +1,43 @@
+.plantuml-code-toggle {
+  display: block;
+  margin-top: 12px;
+  padding: 6px 12px;
+  border: 1px solid #b3bac5;
+  border-radius: 4px;
+  background: #f4f5f7;
+  color: #172b4d;
+  font: inherit;
+  cursor: pointer;
+}
+
+.plantuml-code-toggle:hover {
+  background: #ebecf0;
+}
+
+.plantuml-code-toggle:focus-visible {
+  outline: 2px solid #0052cc;
+  outline-offset: 2px;
+}
+
+.plantuml-code-preview[hidden] {
+  display: none;
+}
+
+.plantuml-code-preview {
+  margin-top: 8px;
+}
+
+.plantuml-code-preview pre {
+  box-sizing: border-box;
+  max-height: 32rem;
+  overflow: auto;
+  margin: 0;
+  padding: 16px;
+  border: 1px solid #dfe1e6;
+  border-radius: 4px;
+  background: #f4f5f7;
+  color: #172b4d;
+  font: 13px/1.5 Consolas, 'Courier New', monospace;
+  white-space: pre;
+  text-align: left;
+}

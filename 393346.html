@@ -4,7 +4,9 @@
     <title>AVPM : Шаблон API</title>
     <link rel="stylesheet" href="styles/site.css" type="text/css" />
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-  </head>
+  <link rel="stylesheet" href="assets/diagram-code.css" />
+<script src="assets/diagram-code.js" defer></script>
+</head>
 
   <body class="theme-default aui-theme-default">
     <div id="page">
@@ -365,7 +367,41 @@
                           style="display: block; max-width: 100%; height: auto"
                           loading="lazy"
                       /></a>
-                    </figure>
+                    <button type="button" class="plantuml-code-toggle" aria-expanded="false" aria-controls="plantuml-code-393346-1">Показать код</button><div id="plantuml-code-393346-1" class="plantuml-code-preview" hidden><pre><code class="language-plantuml">@startuml
+autonumber
+title Отправка устава на согласование
+
+actor "Пользователь" as User
+participant "Frontend" as FE
+participant "Backend API" as API
+database "База данных" as DB
+
+User -&gt; FE : Отправить устав
+FE -&gt; API : POST /project-charters/{id}/submit
+
+API -&gt; API : Проверить JWT, права,\nвалидность запроса
+
+alt Ошибка входных проверок
+    API --&gt; FE : 400 / 401 / 403
+    FE --&gt; User : Показать ошибку
+else Проверки пройдены
+    API -&gt; DB : Получить устав и маршрут
+    DB --&gt; API : Данные устава
+
+    API -&gt; API : Проверить условия отправки
+
+    alt Устав не найден
+        API --&gt; FE : 404 Not Found
+    else Отправка запрещена
+        API --&gt; FE : 400 Bad Request
+    else Отправка разрешена
+        API -&gt; DB : Обновить статусы устава\nи маршрута, сохранить журнал
+        DB --&gt; API : Результат сохранения
+        API --&gt; FE : 200 OK + ProjectCharterDetailsDto
+        FE --&gt; User : Устав отправлен
+    end
+end
+@enduml</code></pre></div></figure>
                     <h2
                       local-id="b13e543fb6c8"
                       id="id-ШаблонAPI-Алгоритмработы"
