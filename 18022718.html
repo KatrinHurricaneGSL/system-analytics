@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>AVPM : POST /api/tasks</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">AVPM</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="163939.html">Программная система управления проектной деятельностью авиапредприятий</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="491523.html">04. Функциональные модули</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="18382849.html">04.03. Канбан-доски и задачи</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="04.03-API_18022662.html">04.03 API</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            AVPM : POST /api/tasks
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                            
+        
+    
+        
+    
+        
+        
+            Created by <span class='author'> Екатерина Попова</span> on нояб. 15, 2026
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <p local-id="f78f693005ee">Создает задачу в указанной колонке доски.</p><p local-id="218368350d1d">Доступ: JWT и разрешение <code>kanban:edit_card</code>.</p><p local-id="7b6f508f9639">Используется в <a href="17531098.html#UC-4.-%D0%A1%D0%BE%D0%B7%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5-%D0%B7%D0%B0%D0%B4%D0%B0%D1%87%D0%B8" data-linked-resource-id="17531098" data-linked-resource-version="2" data-linked-resource-type="page">UC-4. Создание задачи</a>.</p><h2 local-id="31644bd4f254" id="POST/api/tasks-Схемаработы">Схема работы</h2><p /><h2 local-id="9877b21edbc4" id="POST/api/tasks-Алгоритм">Алгоритм</h2><ol start="1" local-id="b00aa906-2d4a-4661-bfd9-1e1b6ba0e16b"><li local-id="23057d59-6a1a-4ab7-a883-2704aa76fdaa"><p local-id="033fc6712dc5">Проверить JWT, разрешение <code>kanban:edit_card</code> и входные данные. Найти колонку по <code>columnId</code>.</p></li><li local-id="a7a2c94b-02cd-4700-8677-e73e7840dca8"><p local-id="0a93966787f3">Создать задачу с текущим пользователем в качестве автора и текущей датой UTC. Установить <code>isClosed</code> равным признаку <code>isCompleteColumn</code> выбранной колонки. Остальные поля инициализировать значениями по умолчанию.</p></li><li local-id="8b3d2fc2-14b2-42fd-bde7-54a48967fae2"><p local-id="821f9262dd23">Если <code>isFunctionalRequirement=true</code>, сохранить связи с нормативными требованиями из <code>regulatoryRequirementIds</code>. В противном случае использовать пустой список требований.</p></li><li local-id="a0148a68-db3e-4f8e-8f33-c1d6c67edca8"><p local-id="eaf59e558eb6">Проверить связанный с доской проект и синхронизировать матрицу нормативных требований.</p></li><li local-id="66dc10d3-4dbf-40fd-b02c-8b2046266f99"><p local-id="82736039952d">Записать действие создания задачи.</p></li><li local-id="a440382b-2eb3-4ef1-9900-785ed16cdb38"><p local-id="ec6e62e4e58f">Повторно загрузить задачу в формате <code>TaskCardDto</code> и вернуть <code>201</code> с заголовком <code>Location</code>.</p></li></ol><h2 local-id="b13c269eb85a" id="POST/api/tasks-Входныепараметры">Входные параметры</h2><p local-id="b8ffbbc565ce">Тело запроса (BODY, JSON).</p><div class="table-wrap"><table data-table-width="1075" data-layout="align-start" data-local-id="14d95170-3ef0-4776-8d4d-cbf289afedda" class="confluenceTable"><colgroup><col style="width: 65.0px;"/><col style="width: 232.0px;"/><col style="width: 90.0px;"/><col style="width: 132.0px;"/><col style="width: 551.0px;"/></colgroup><tbody><tr data-local-id="fe62f4d1-633c-4c02-ba7f-72cda8c46b1e"><th data-local-id="42ba11fc-e2d4-4350-ba41-4d04b0ac4b0c" class="confluenceTh"><p local-id="3ba5db934400"><strong>Где</strong></p></th><th data-local-id="f9366d94-2d14-4d41-80af-81835413e41c" class="confluenceTh"><p local-id="94743bc2d3ba"><strong>Поле</strong></p></th><th data-local-id="e54176ec-c385-4af5-98cc-1a51bb1020af" class="confluenceTh"><p local-id="d14e2c3f80b0"><strong>Тип</strong></p></th><th data-local-id="2531789b-2e03-4331-a570-4c6cf1f2dcd5" class="confluenceTh"><p local-id="0f3cd6edf7b9"><strong>Обязательно</strong></p></th><th data-local-id="6965ce81-d696-4d06-ad2f-08968df01819" class="confluenceTh"><p local-id="0566753c4b04"><strong>Описание и ограничения</strong></p></th></tr><tr data-local-id="1ea064e7-b3ad-4c64-ab6e-7aea311fb971"><td data-local-id="be73c8ee-38eb-42b3-8371-e7f8dfa7d82e" class="confluenceTd"><p local-id="29a221369fc3">BODY</p></td><td data-local-id="db80d4df-9060-4fcd-b1e4-f3582d1b3dde" class="confluenceTd"><p local-id="39cfeb306685"><code>columnId</code></p></td><td data-local-id="5e71be70-55e5-4d6c-b56f-9511e5a93533" class="confluenceTd"><p local-id="d42ccb6716c8">integer</p></td><td data-local-id="94395443-9cd9-4944-845e-67e8bc04cd18" class="confluenceTd"><p local-id="a014545cf34e">Да</p></td><td data-local-id="fabcb3bd-7675-48ff-8699-cb9ddfabd778" class="confluenceTd"><p local-id="29b176c157ab">Идентификатор колонки. Отдельная проверка значения <code>&gt; 0</code> отсутствует</p></td></tr><tr data-local-id="3f497d6a-6ecb-429d-888e-1bd76d18ac2c"><td data-local-id="0d808abe-0025-475c-894c-36eb3c1db866" class="confluenceTd"><p local-id="505e5141ff1b">BODY</p></td><td data-local-id="09702634-3cb9-42e1-89cb-6280a0e86505" class="confluenceTd"><p local-id="ae8a4e904f30"><code>title</code></p></td><td data-local-id="49b99b6e-6438-4d4b-9a34-2fd6c9eb378d" class="confluenceTd"><p local-id="d2e8dd360fa2">string</p></td><td data-local-id="762a4cc4-68eb-4f91-b7d4-92f5f09f7f6c" class="confluenceTd"><p local-id="768ff1540439">Да</p></td><td data-local-id="99ea3c6a-a3ff-4112-a5e7-52effe3af16b" class="confluenceTd"><p local-id="007480517259">Название задачи, не более 100 символов</p></td></tr><tr data-local-id="12767266-8fd6-4e33-a21d-4c9b83e18955"><td data-local-id="e538ff01-e682-4b79-81e3-8ec79bb3014e" class="confluenceTd"><p local-id="948becf33c25">BODY</p></td><td data-local-id="b3090776-b2da-46f4-92e4-d539f948a14b" class="confluenceTd"><p local-id="4a3288dcd6d3"><code>description</code></p></td><td data-local-id="78023527-96e4-44a1-b541-6e9efa47639f" class="confluenceTd"><p local-id="c3f244dc96b7">string</p></td><td data-local-id="949faa02-e93c-4733-a424-09360758c6ac" class="confluenceTd"><p local-id="45bdc88fea98">Да</p></td><td data-local-id="5a944a83-c844-424a-8df8-e56d0012a414" class="confluenceTd"><p local-id="f3f287f705b9">Описание задачи. Интерфейс передает пустую строку, если описание не заполнено</p></td></tr><tr data-local-id="c65d9b09-f566-476c-b95e-f6e6bb44d9ea"><td data-local-id="a0e0d46f-8598-4f0f-9691-6fb231765927" class="confluenceTd"><p local-id="e510cf4b4aa3">BODY</p></td><td data-local-id="373df260-35a1-421e-b07b-3c9c2a14817d" class="confluenceTd"><p local-id="d3b0af530058"><code>isFunctionalRequirement</code></p></td><td data-local-id="d22146f7-9363-4fda-8d7c-7e3b82106fe7" class="confluenceTd"><p local-id="abbff8dd9f73">boolean</p></td><td data-local-id="79edcd50-7cd8-465a-8d83-db36997eabce" class="confluenceTd"><p local-id="5402b16da8d8">Нет</p></td><td data-local-id="ec9ce212-f7f1-4f0d-bd93-1379216539d3" class="confluenceTd"><p local-id="614a0b6a9e63">Признак функционального требования, по умолчанию <code>false</code></p></td></tr><tr data-local-id="fc03eb18-6c7c-4cc4-964e-c8e665771394"><td data-local-id="ba9dd636-e218-40db-9aea-b1b94a5e6a1e" class="confluenceTd"><p local-id="3d480a19d9f8">BODY</p></td><td data-local-id="8cdaa5be-11bb-4bd0-aff1-44db454a743d" class="confluenceTd"><p local-id="b88e55d83ffc"><code>regulatoryRequirementIds</code></p></td><td data-local-id="88e37d5c-49d6-4fd8-a326-623d0924fee4" class="confluenceTd"><p local-id="5841c80dbb53">integer[]</p></td><td data-local-id="f7ca2b21-6900-4a0e-9642-8be73fa06cdb" class="confluenceTd"><p local-id="7b00c0ec1aa8">Нет</p></td><td data-local-id="948947ab-c082-4b0c-b992-df713349e9de" class="confluenceTd"><p local-id="48be8923b3e3">Идентификаторы нормативных требований, по умолчанию <code>[]</code>. Значение <code>null</code> не поддерживается</p></td></tr></tbody></table></div><h2 local-id="e4f22c837d71" id="POST/api/tasks-Ответ">Ответ</h2><p local-id="0fdcb5cd1211">201 Created: возвращает объект <code>TaskCardDto</code> с данными созданной задачи.</p><p local-id="b4e3e28115e2">Структура ответа описана в методе <a href="https://katerinapopova.atlassian.net/wiki/x/XIAdAQ" rel="nofollow">GET /api/tasks/{id}</a>.</p><h2 local-id="68f9cab35e21" id="POST/api/tasks-Ошибки">Ошибки</h2><div class="table-wrap"><table data-table-width="775" data-layout="align-start" data-local-id="3703d4ff-67e3-43c9-899f-d160707320ea" class="confluenceTable"><colgroup><col style="width: 67.0px;"/><col style="width: 352.0px;"/><col style="width: 356.0px;"/></colgroup><tbody><tr data-local-id="6189ef84-00c5-445b-bed4-3430676b4e61"><th data-local-id="62c9f5de-75fb-4406-b150-efc65ae3cbfb" class="confluenceTh"><p local-id="770f24646bb0"><strong>Код</strong></p></th><th data-local-id="e8c973be-9de5-4277-b9a5-f482e67c2caa" class="confluenceTh"><p local-id="408f129ec91f"><strong>Причина</strong></p></th><th data-local-id="1cdd5dbc-2d0f-4c18-8e5a-43bb1ecd9262" class="confluenceTh"><p local-id="c7e40821d41d"><strong>Ответ</strong></p></th></tr><tr data-local-id="6a7e4a7d-e153-4ae1-a22a-45fbf4b9ae30"><td data-local-id="e8d6f296-0c0b-40f0-8cd8-daf8b580e2d2" class="confluenceTd"><p local-id="53e9dbac07d5">400</p></td><td data-local-id="9072f33f-ede2-47e7-8e1d-8a436cbbb617" class="confluenceTd"><p local-id="60ce4ef49f4b">Некорректные входные данные</p></td><td data-local-id="237a390e-bfd0-4c52-921e-2136a95a0af6" class="confluenceTd"><p local-id="26d5b0eae5f6">Стандартная ошибка валидации</p></td></tr></tbody></table></div><h2 local-id="ac14ab9d7805" id="POST/api/tasks-Примерзапроса">Пример запроса</h2><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">POST /api/tasks
+Content-Type: application/json
+
+{
+  &quot;columnId&quot;: 11,
+  &quot;title&quot;: &quot;Подготовить испытания&quot;,
+  &quot;description&quot;: &quot;&quot;,
+  &quot;isFunctionalRequirement&quot;: false,
+  &quot;regulatoryRequirementIds&quot;: []
+}</pre>
+</div></div>
+                    </div>
+
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on нояб. 18, 2026 16:13</p>
+                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

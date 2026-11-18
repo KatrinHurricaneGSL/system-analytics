@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>AVPM : DELETE /api/projects/{id}</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">AVPM</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="163939.html">Программная система управления проектной деятельностью авиапредприятий</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="491523.html">04. Функциональные модули</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="17432619.html">04.02. Управление проектами</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="04.02.-API_18022461.html">04.02. API</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            AVPM : DELETE /api/projects/{id}
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                            
+        
+    
+        
+    
+        
+        
+            Created by <span class='author'> Екатерина Попова</span>, last modified on нояб. 14, 2026
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <p local-id="eee878db3edb">Удаляет проект из БД, если это допускают связи с другими данными.</p><p local-id="716b3a71494b"><strong>Доступ:</strong> JWT и право <code>project:delete</code>. </p><h2 local-id="73a44a993ff7" id="DELETE/api/projects/{id}-Схемаработы">Схема работы</h2><p /><h2 local-id="f5e31fb4278e" id="DELETE/api/projects/{id}-Алгоритм">Алгоритм</h2><ol start="1" local-id="5c5f7344-8787-4c4e-a962-405beb3ce8a3"><li local-id="d6c73036-224d-4924-b9c4-4ef7e94a764b"><p local-id="c1be894a4192">Проверить JWT и право <code>project:delete</code>. Найти проект по идентификатору. Если проект не найден, вернуть <code>404</code>.</p></li><li local-id="e2d1b30b-ba15-408b-ac40-a723e4f9f3f0"><p local-id="974602908fe8">Удалить проект через <code>Remove</code> и сохранить изменения с помощью <code>SaveChanges</code>. Предварительная очистка досок и связанных данных других модулей не выполняется.</p></li><li local-id="983568b5-b0d5-40e8-9953-16203b08000d"><p local-id="ff46066e83c4">Если связи БД допускают удаление, удалить проект и вернуть <code>204</code> без тела ответа. Участники проекта удаляются каскадно, а поле <code>project_id</code> связанного устава получает значение <code>NULL</code>.</p></li><li local-id="5f3df2a5-3e4e-4910-ad0b-10adf19e4ab7"><p local-id="cffd745f7b04">Если у проекта есть доски со связью <code>RESTRICT</code>, БД отклоняет удаление. Контроллер не преобразует такую ошибку в предметный ответ <code>400</code> или <code>409</code>.</p></li></ol><h2 local-id="055eff897373" id="DELETE/api/projects/{id}-Входныепараметры">Входные параметры</h2><p local-id="adb23c08c7cb">Параметр пути (PATH). Тело запроса и QUERY-параметры отсутствуют.</p><div class="table-wrap"><table data-table-width="583" data-layout="align-start" data-local-id="2389c5fc-2cf7-43d1-9504-daf3d17c4ad8" class="confluenceTable"><colgroup><col style="width: 66.0px;"/><col style="width: 65.0px;"/><col style="width: 77.0px;"/><col style="width: 134.0px;"/><col style="width: 241.0px;"/></colgroup><tbody><tr data-local-id="5ddbfaed-08c0-4872-9bed-e97dacb472d4"><th data-local-id="790bc402-f4ba-4976-a0b3-ad7ab5896c09" class="confluenceTh"><p local-id="814fde614035"><strong>Где</strong></p></th><th data-local-id="e64c27b9-d532-4ed2-8852-e211183859bb" class="confluenceTh"><p local-id="a89cf55cf4ae"><strong>Поле</strong></p></th><th data-local-id="7ed08c2e-3b76-46c0-b6e5-e6c936c69742" class="confluenceTh"><p local-id="c563e2bb69d2"><strong>Тип</strong></p></th><th data-local-id="898dd381-45a2-457d-a16d-74773344f61b" class="confluenceTh"><p local-id="d49c2c875d63"><strong>Обязательно</strong></p></th><th data-local-id="5fdf1cd3-c76c-428a-8f7f-8a00711b5e3e" class="confluenceTh"><p local-id="77e4a484ce24"><strong>Описание</strong></p></th></tr><tr data-local-id="4e7f64b0-5db6-4acc-a819-55fdd10e1717"><td data-local-id="8e22871c-3d69-4568-b807-f76533534a41" class="confluenceTd"><p local-id="54b01e168930">PATH</p></td><td data-local-id="5399044c-8782-43e3-b884-ba9d2a32ba72" class="confluenceTd"><p local-id="a3069be50f0b"><code>id</code></p></td><td data-local-id="986ee945-4449-4ffa-8d7c-86f08649a47c" class="confluenceTd"><p local-id="4e5833d79088">integer</p></td><td data-local-id="7c575f86-1412-4672-ab04-fe3e3948d716" class="confluenceTd"><p local-id="52c258b42a44">Да</p></td><td data-local-id="2e4929bd-0a15-4ab3-9ce4-187e84e68436" class="confluenceTd"><p local-id="3de429118a20">Идентификатор проекта</p></td></tr></tbody></table></div><h2 local-id="b1af1ef6eee1" id="DELETE/api/projects/{id}-Ответ">Ответ</h2><p local-id="56cc89d2c3f1">204 No Content: проект успешно удален, тело ответа отсутствует.</p><h2 local-id="72999cf299f7" id="DELETE/api/projects/{id}-Ошибки">Ошибки</h2><div class="table-wrap"><table data-table-width="760" data-layout="align-start" data-local-id="d7825510-60ac-45e6-9888-838a48232dae" class="confluenceTable"><tbody><tr data-local-id="faf8aefa-a5e7-40d8-9eb6-48aacdb5cc72"><th data-local-id="86b2e148-c883-4aa1-95f6-11905fbfba44" class="confluenceTh"><p local-id="6dca6513edfe"><strong>Код</strong></p></th><th data-local-id="a853a5e4-1892-4804-b96f-c6e9de836066" class="confluenceTh"><p local-id="54e6a4be2c4f"><strong>Причина</strong></p></th><th data-local-id="ddff4eea-e33f-47e0-bbb0-bcb7ac37111b" class="confluenceTh"><p local-id="6f09d6772f0a"><strong>Ответ</strong></p></th></tr><tr data-local-id="8cc222cf-db10-4c2d-a184-33473c9c108a"><td data-local-id="8b787d42-d298-4cdd-99da-79eb684fb364" class="confluenceTd"><p local-id="41dc5a9b12c0">404</p></td><td data-local-id="cc1f42b2-938d-4b79-83af-b58902979bfb" class="confluenceTd"><p local-id="7929815c5759">Проект не найден</p></td><td data-local-id="201c8195-4528-434a-af9c-12f6642e8252" class="confluenceTd"><p local-id="8997219cf16c"><code>{message}</code></p></td></tr></tbody></table></div><h2 local-id="9ffb626993af" id="DELETE/api/projects/{id}-Примерзапроса">Пример запроса</h2><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">DELETE /api/projects/12</pre>
+</div></div>
+                    </div>
+
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on нояб. 18, 2026 16:13</p>
+                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

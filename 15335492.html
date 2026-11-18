@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>AVPM : GET /api/project-charters/{id}/versions</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">AVPM</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="163939.html">Программная система управления проектной деятельностью авиапредприятий</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="491523.html">04. Функциональные модули</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="163983.html">04.01. Управление уставами проекта</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="04.01.-API_426066.html">04.01. API</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            AVPM : GET /api/project-charters/{id}/versions
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                            
+        
+    
+        
+    
+        
+        
+            Created by <span class='author'> Екатерина Попова</span>, last modified on нояб. 14, 2026
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <p local-id="0ecff0a042d9">Возвращает список сохраненных версий устава.</p><p local-id="c8147e3b9856"><strong>Доступ: </strong>право <code>project_charter:access</code>.</p><p local-id="880c379797cf">Используется в <a href="14581763.html#UC-7.-%D0%9F%D1%80%D0%BE%D1%81%D0%BC%D0%BE%D1%82%D1%80-%D0%B8%D1%81%D1%82%D0%BE%D1%80%D0%B8%D0%B8" data-linked-resource-id="14581763" data-linked-resource-version="5" data-linked-resource-type="page">UC-7. Просмотр истории</a>.</p><h2 local-id="dd19a125ae71" id="GET/api/project-charters/{id}/versions-Схемаработы">Схема работы</h2><p /><h2 local-id="0449c2e0e59a" id="GET/api/project-charters/{id}/versions-Алгоритм"><strong>Алгоритм</strong></h2><ol start="1" local-id="3ccb70c0-dc41-49ec-8398-aad1aa50ba3a"><li local-id="c2d41484-f883-4852-93df-91682e5215d3"><p local-id="587525cfb1f2">Проверить право доступа и получить список версий устава.</p></li><li local-id="31316445-b293-4065-a21a-7ec4cb0f5211"><p local-id="393ceea2b3a4">Отсортировать версии по номеру, затем по идентификатору в порядке убывания.</p></li><li local-id="e31b3c32-a522-40b9-9ede-cb601cbd0ebf"><p local-id="999b41c0e4ca">Для каждой версии проверить наличие сохраненных данных.</p></li><li local-id="d8978729-ea45-4a3c-a504-437912519f89"><p local-id="ee78d358e6a1">Вернуть массив версий устава.</p></li></ol><h2 local-id="d648fc7e2eec" id="GET/api/project-charters/{id}/versions-Входныепараметры"><strong>Входные параметры</strong></h2><p local-id="7e34abdff92c">Параметр пути (PATH). Тело запроса и QUERY-параметры отсутствуют.</p><div class="table-wrap"><table data-table-width="553" data-layout="align-start" data-local-id="71a55d67-c959-41e1-831a-d700de4818a0" class="confluenceTable"><colgroup><col style="width: 74.0px;"/><col style="width: 88.0px;"/><col style="width: 147.0px;"/><col style="width: 244.0px;"/></colgroup><tbody><tr data-local-id="43ae97a1-af9c-48a2-ac72-3ba0b1b2f1b3"><th data-local-id="ca927c7c-0399-401f-b478-80640e38c96b" class="confluenceTh"><p local-id="6c104ff698f4"><strong>Поле</strong></p></th><th data-local-id="8e081b52-52a3-4929-a014-16ca51e6f4b4" class="confluenceTh"><p local-id="ef9f82879748"><strong>Тип</strong></p></th><th data-local-id="b12dee5f-ba74-4d01-b529-50ad3d3c0fe4" class="confluenceTh"><p local-id="6561c4f1aac7"><strong>Обязательно</strong></p></th><th data-local-id="3e287441-d21a-41db-967b-e76d741b9259" class="confluenceTh"><p local-id="6c3db5b3898f"><strong>Описание</strong></p></th></tr><tr data-local-id="3be3e470-7fe6-4462-8b4d-5e5f09a02b42"><td data-local-id="fcb4b777-b967-4c31-8c85-475d22e2da48" class="confluenceTd"><p local-id="ceac27d6a2b0"><code>id</code></p></td><td data-local-id="0abfc385-5819-4f5b-bf7a-ebc126171960" class="confluenceTd"><p local-id="0ef35713c7b8">integer</p></td><td data-local-id="8184290c-7f05-4462-85d8-046edef64ca7" class="confluenceTd"><p local-id="07e5287b6137">Да</p></td><td data-local-id="b53e5e9e-3cbc-42fa-9456-e2ef7790bb30" class="confluenceTd"><p local-id="061e4bb78551">Идентификатор устава</p></td></tr></tbody></table></div><h2 local-id="999a160f827e" id="GET/api/project-charters/{id}/versions-Ответ"><strong>Ответ</strong></h2><p local-id="a30364c68e18"><strong>200 OK: </strong>возвращает массив версий устава.</p><p local-id="f5a0e374b37a">Поля каждого элемента массива:</p><div class="table-wrap"><table data-table-width="855" data-layout="align-start" data-local-id="1071f731-b6a8-4bb1-b66a-3ecf938c5db4" class="confluenceTable"><colgroup><col style="width: 172.0px;"/><col style="width: 158.0px;"/><col style="width: 525.0px;"/></colgroup><tbody><tr data-local-id="053b9989-738d-4134-86f4-75871847669c"><th data-local-id="ac1ec893-880d-4092-bdb2-d869aefefaa1" class="confluenceTh"><p local-id="99d9e2ea5f4e"><strong>Поле</strong></p></th><th data-local-id="b6f32453-697a-4684-9802-e7cebf7dda1a" class="confluenceTh"><p local-id="ccc94be79c84"><strong>Тип</strong></p></th><th data-local-id="cff83392-d3f2-4e8f-984b-78961ecda127" class="confluenceTh"><p local-id="de1f1c20b878"><strong>Описание</strong></p></th></tr><tr data-local-id="3e2134ef-cd76-48e8-b135-32d9f21810d1"><td data-local-id="00c96afa-8cff-486c-9641-deb2d3190332" class="confluenceTd"><p local-id="1f0afb7b4076"><code>id</code></p></td><td data-local-id="c05a6425-97a8-4855-807c-dc191392d014" class="confluenceTd"><p local-id="aeac9a18c5f8">integer</p></td><td data-local-id="94c9b031-9ec8-493c-87d2-16821e5d8d26" class="confluenceTd"><p local-id="5931ec931d97">Идентификатор записи истории версий</p></td></tr><tr data-local-id="6b8dda13-5136-4853-b07c-c4278446d921"><td data-local-id="64fb459f-2b83-48c9-8f28-511a08a5bed6" class="confluenceTd"><p local-id="5e22df73723b"><code>version</code></p></td><td data-local-id="1e0e5644-fba5-4f1e-9d2f-6bfbfef2ab55" class="confluenceTd"><p local-id="d8af6c0b1bed">integer</p></td><td data-local-id="2e357edd-871c-4563-869b-5401c0a2ca82" class="confluenceTd"><p local-id="a86c61350df0">Номер версии устава</p></td></tr><tr data-local-id="30f3d260-aa7b-44db-8e84-c87dc9f0dead"><td data-local-id="1fd4d48d-0130-4278-a4ad-a622aa7753e3" class="confluenceTd"><p local-id="ea32ddbf4fa0"><code>status</code></p></td><td data-local-id="db8ae5b9-a491-4a2a-9c3b-e498e508853b" class="confluenceTd"><p local-id="0ace088bda23">string</p></td><td data-local-id="1d24185f-4151-4dc5-bf3d-119cb30ca5c4" class="confluenceTd"><p local-id="22e71d2d49cb">Статус устава на момент сохранения</p></td></tr><tr data-local-id="b9ae63a7-e855-4007-97a2-f6227883748f"><td data-local-id="69d69b49-9700-4c46-b1a4-bdd17d8d21f1" class="confluenceTd"><p local-id="32039694b53a"><code>comment</code></p></td><td data-local-id="9bab09e3-6d60-44a6-a315-341d5657f864" class="confluenceTd"><p local-id="6c4b94ea3c68">string, nullable</p></td><td data-local-id="92f8ac10-26e4-4db5-9a4a-41a15af64e18" class="confluenceTd"><p local-id="28d29d2edef4">Комментарий к версии</p></td></tr><tr data-local-id="8c42a21c-9161-4199-b26c-ddad7b49c9fe"><td data-local-id="d15f3548-012f-4a00-a899-912884a677e4" class="confluenceTd"><p local-id="8244620b734b"><code>hasSnapshot</code></p></td><td data-local-id="eb26c2a2-78a7-4fbb-8128-c9f1b2bb1c0f" class="confluenceTd"><p local-id="ceb28b2fc390">boolean</p></td><td data-local-id="2a37ea0d-c158-4a6d-b6a3-d1a0c3a9c58c" class="confluenceTd"><p local-id="93578ae4f422">Признак наличия сохраненных данных версии</p></td></tr><tr data-local-id="3caf734b-a9b4-42a5-a702-10b8f542580f"><td data-local-id="b2a89042-95cd-4681-aa3c-b11f37552535" class="confluenceTd"><p local-id="44bd82e82556"><code>actionByUserId</code></p></td><td data-local-id="056d4fbf-0d2b-4579-91fa-0bdccf67f1be" class="confluenceTd"><p local-id="5801b5a5358d">integer, nullable</p></td><td data-local-id="cae73bc4-1bed-432d-a7e3-1753abfd5f57" class="confluenceTd"><p local-id="8841f323e5cb">Идентификатор пользователя, выполнившего действие</p></td></tr><tr data-local-id="6e6580de-f55b-40ae-9184-dbbe93e1d7ad"><td data-local-id="2a682255-e442-41a7-9c49-1b40dec34e45" class="confluenceTd"><p local-id="afc075fe54e1"><code>createdAtUtc</code></p></td><td data-local-id="5ec73132-5ae2-4574-bdd6-ad3a86b662dd" class="confluenceTd"><p local-id="32302a190bfc">date-time</p></td><td data-local-id="635bac9c-35f4-47ef-8de8-675b4ae432e9" class="confluenceTd"><p local-id="fde74054281c">Дата и время создания версии</p></td></tr></tbody></table></div><p local-id="129f8a966e89">Если устав не найден или история версий пуста, система возвращает <code>200 OK</code> с пустым массивом <code>[]</code>.</p><p local-id="12bb34c19a8b">Для получения сохраненных данных выбранной версии используется отдельный метод <code>GET /api/project-charters/{id}/versions/{version}</code>.</p><h2 local-id="73faf69e1edb" id="GET/api/project-charters/{id}/versions-Примерзапроса"><strong>Пример запроса</strong></h2><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">GET /api/project-charters/101/versions</pre>
+</div></div>
+                    </div>
+
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on нояб. 18, 2026 16:13</p>
+                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

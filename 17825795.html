@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>AVPM : GET /api/project-charters/users</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">AVPM</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="163939.html">Программная система управления проектной деятельностью авиапредприятий</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="491523.html">04. Функциональные модули</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="163983.html">04.01. Управление уставами проекта</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="04.01.-API_426066.html">04.01. API</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            AVPM : GET /api/project-charters/users
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                            
+        
+    
+        
+    
+        
+        
+            Created by <span class='author'> Екатерина Попова</span> on нояб. 14, 2026
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <p local-id="bef119d6f062">Возвращает список пользователей для выбора ответственного и согласующих при создании или изменении устава.</p><p local-id="f07ccf70e316"><strong>Доступ: </strong>право <code>project_charter:access</code>.</p><p local-id="d5bdccfea05b">Используется в <a href="14581763.html#UC-2.-%D0%A1%D0%BE%D0%B7%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5-%D1%83%D1%81%D1%82%D0%B0%D0%B2%D0%B0" data-linked-resource-id="14581763" data-linked-resource-version="5" data-linked-resource-type="page">UC-2. Создание устава</a>.</p><h2 local-id="e2efbc06f089" id="GET/api/project-charters/users-Схемаработы"><strong>Схема работы</strong></h2><p /><h2 local-id="4b5a09117d31" id="GET/api/project-charters/users-Алгоритм"><strong>Алгоритм</strong></h2><ol start="1" local-id="c06466f1-6dc8-4059-8bcd-ed2c1e553b1b"><li local-id="f8e78341-a16e-4151-93ac-57f92a9a6c89"><p local-id="8a53922e8f9f">Проверить право доступа и получить список пользователей.</p></li><li local-id="fcae1761-534c-47c2-bf7d-ee2415836d30"><p local-id="c9f40a95c2c6">Отсортировать пользователей по имени, затем по <code>username</code> в порядке возрастания.</p></li><li local-id="b05e96fb-a2f5-46be-a9c4-4b0271563453"><p local-id="ffb23c013bcf">Вернуть массив пользователей для выбора в форме устава.</p></li></ol><h2 local-id="792b39cba4cc" id="GET/api/project-charters/users-Входныепараметры"><strong>Входные параметры</strong></h2><p local-id="a346c13a7004">Параметры пути (PATH), параметры запроса (QUERY) и тело запроса отсутствуют.</p><h2 local-id="b0d4c7d47cf7" id="GET/api/project-charters/users-Ответ"><strong>Ответ</strong></h2><p local-id="c3f3f8770db3"><strong>200 OK:</strong> возвращает массив пользователей.</p><p local-id="3b2e103592ed">Поля каждого элемента массива:</p><div class="table-wrap"><table data-table-width="568" data-layout="align-start" data-local-id="8f2e429d-767b-4faf-8e3d-26750cc628c2" class="confluenceTable"><colgroup><col style="width: 130.0px;"/><col style="width: 96.0px;"/><col style="width: 342.0px;"/></colgroup><tbody><tr data-local-id="1d470434-fb93-45cb-a13b-77b7950d71c0"><th data-local-id="3bf404bc-062e-465a-ab27-2fe24487ffc5" class="confluenceTh"><p local-id="7a2987b6620b"><strong>Поле</strong></p></th><th data-local-id="c5b7a569-5f42-4f1e-865d-9ad9a3efabd5" class="confluenceTh"><p local-id="a7bfb3b1f609"><strong>Тип</strong></p></th><th data-local-id="d9e3664f-633c-4985-89fb-5b47b7cc8525" class="confluenceTh"><p local-id="3c560e1d1599"><strong>Описание</strong></p></th></tr><tr data-local-id="924c6c5f-99b2-474f-ae75-b9f5efb77255"><td data-local-id="c7f8e461-78ba-4bb9-9e22-869f94c2b4bd" class="confluenceTd"><p local-id="eb3e6f20c629"><code>id</code></p></td><td data-local-id="cec7d66d-7839-4464-9652-280a08b64097" class="confluenceTd"><p local-id="c320a2bcc210">integer</p></td><td data-local-id="0fd8e5a8-06e2-498e-8310-024825d396a0" class="confluenceTd"><p local-id="34cbd3a1cc32">Идентификатор пользователя</p></td></tr><tr data-local-id="efd1568a-4f93-42ea-acc6-914679c60324"><td data-local-id="15a31845-cd35-4359-a447-f8b656b049bb" class="confluenceTd"><p local-id="22e5ef42eb19"><code>name</code></p></td><td data-local-id="75764a5c-cff1-431d-b09d-982f8e29933e" class="confluenceTd"><p local-id="43c980bf12e1">string</p></td><td data-local-id="60c84303-0af2-4fae-888f-157457b65046" class="confluenceTd"><p local-id="d72bbd825a10">Имя пользователя</p></td></tr><tr data-local-id="1861352f-0aa9-4075-bed2-b97f798dbd71"><td data-local-id="876d600c-b69e-4149-9437-f8944448c374" class="confluenceTd"><p local-id="93e2d5d07d90"><code>email</code></p></td><td data-local-id="23c4f842-5657-4874-865e-e5145e1bb664" class="confluenceTd"><p local-id="d0afa9e453d3">string</p></td><td data-local-id="d7d6249c-08dd-467b-afa5-c259b9cef8e8" class="confluenceTd"><p local-id="b64b1103df21">Электронная почта</p></td></tr><tr data-local-id="4e5634ed-1cf4-4fd2-9c1e-cace16d4d3fb"><td data-local-id="28207480-0988-4f5c-8969-6896c261950e" class="confluenceTd"><p local-id="3d3a043ead7e"><code>username</code></p></td><td data-local-id="c83a22cf-524a-4f8c-85c1-d44e3fda8094" class="confluenceTd"><p local-id="3174caaf66c5">string</p></td><td data-local-id="5772221f-874b-4f86-b658-d2484ec6eb89" class="confluenceTd"><p local-id="feaf3cecef80">Логин пользователя</p></td></tr></tbody></table></div><p local-id="1d3d62b06106">Если пользователи отсутствуют, система возвращает <code>200 OK</code> с пустым массивом <code>[]</code>.</p><p local-id="3512b576f293">Список не фильтруется по организации или наличию права <code>project_charter:approve</code>. Назначение пользователя согласующим не предоставляет ему это право автоматически.</p><h2 local-id="408176e4300f" id="GET/api/project-charters/users-Ошибки"><strong>Ошибки</strong></h2><div class="table-wrap"><table data-table-width="584" data-layout="align-start" data-local-id="dd7d0025-0fa1-4548-8d93-678ddeda2ef6" class="confluenceTable"><colgroup><col style="width: 55.0px;"/><col style="width: 529.0px;"/></colgroup><tbody><tr data-local-id="5ece07bc-8cc0-4fc7-b35a-45108e0efe45"><th data-local-id="a429d730-7d99-49eb-8d2a-850a9ff7bb70" class="confluenceTh"><p local-id="e5294946904b"><strong>Код</strong></p></th><th data-local-id="0a9eed0b-5301-47ba-a153-3ff116e93857" class="confluenceTh"><p local-id="aa088eb5cfbc"><strong>Причина</strong></p></th></tr><tr data-local-id="c365398c-f36d-4d8d-9b84-424711869363"><td data-local-id="a389d0cf-a2a2-44ec-914c-bcc3a76ab988" class="confluenceTd"><p local-id="35f55299d27c">401</p></td><td data-local-id="d9b09371-65ac-4be2-82e0-d8de82af3a9b" class="confluenceTd"><p local-id="6425fffe7889">Пользователь не авторизован</p></td></tr><tr data-local-id="026fd1c5-dc70-4b5f-8359-7bd6929734d6"><td data-local-id="1c9dbc1c-22a5-49bd-a433-bb47da21f50e" class="confluenceTd"><p local-id="e54200033899">403</p></td><td data-local-id="a9ffa9f6-30fb-4343-97e4-30634edef4fe" class="confluenceTd"><p local-id="55fa29db6141">У пользователя отсутствует право <code>project_charter:access</code></p></td></tr></tbody></table></div><p local-id="8322ccae5701">Другие ошибки доступа описаны в общей документации API.</p><h2 local-id="d7d008225fda" id="GET/api/project-charters/users-Примерзапроса"><strong>Пример запроса</strong></h2><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">GET /api/project-charters/users</pre>
+</div></div>
+                    </div>
+
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on нояб. 18, 2026 16:13</p>
+                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

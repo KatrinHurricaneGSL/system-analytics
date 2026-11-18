@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>AVPM : DELETE /api/boards/{id}</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">AVPM</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="163939.html">Программная система управления проектной деятельностью авиапредприятий</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="491523.html">04. Функциональные модули</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="18382849.html">04.03. Канбан-доски и задачи</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="04.03-API_18022662.html">04.03 API</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            AVPM : DELETE /api/boards/{id}
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                            
+        
+    
+        
+    
+        
+        
+            Created by <span class='author'> Екатерина Попова</span> on нояб. 15, 2026
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <p local-id="13f823329cfa">Удаляет доску вместе с колонками, задачами и связанными данными.</p><p local-id="6bb43c0de98f">Доступ: JWT. Удаление разрешено только владельцу доски.</p><h2 local-id="ebb4f6994d72" id="DELETE/api/boards/{id}-Схемаработы">Схема работы</h2><p /><h2 local-id="3b6869f455fb" id="DELETE/api/boards/{id}-Алгоритм">Алгоритм</h2><ol start="1" local-id="e7a427c2-a179-4d6e-b082-79f6aa78d9a1"><li local-id="f2cc60b4-def9-4c9c-9941-870a550ba134"><p local-id="9f6b8c1aec62">Проверить JWT и найти доску по идентификатору.</p></li><li local-id="24d5db04-32de-4681-b058-2a0aad65c8e7"><p local-id="89108eecf76e">Сравнить <code>OwnerId</code> доски с идентификатором текущего пользователя. Если значения не совпадают, отказать в удалении.</p></li><li local-id="9a1a0d71-18c5-4bbc-908d-c2f66461098f"><p local-id="9d9fdc82473d">Удалить доску. Связанные колонки, задачи и их дочерние записи удаляются каскадно по внешним ключам.</p></li><li local-id="55f3df25-3773-475f-9b3b-8e881b06783e"><p local-id="3aeee8c91f82">При успешном удалении вернуть <code>204</code> без тела ответа.</p></li></ol><h2 local-id="3f2bb003bf1e" id="DELETE/api/boards/{id}-Входныепараметры">Входные параметры</h2><p local-id="f56aafd3c677">Параметр пути (PATH). Тело запроса и QUERY-параметры отсутствуют.</p><div class="table-wrap"><table data-table-width="542" data-layout="align-start" data-local-id="05402e77-bf96-4c6c-a49a-8535f6b68945" class="confluenceTable"><colgroup><col style="width: 75.0px;"/><col style="width: 86.0px;"/><col style="width: 149.0px;"/><col style="width: 232.0px;"/></colgroup><tbody><tr data-local-id="524ecf54-cfd9-4997-9eb1-e6516d4ccc10"><th data-local-id="54f54a91-36f5-4e57-b906-38d5c0db64d1" class="confluenceTh"><p local-id="00c19775c640"><strong>Поле</strong></p></th><th data-local-id="fdbb36eb-bae9-4337-b41d-c3e76f843860" class="confluenceTh"><p local-id="0ed44c06b2ba"><strong>Тип</strong></p></th><th data-local-id="77f5b467-6eeb-4334-9c74-c41504567ef7" class="confluenceTh"><p local-id="e9ba6fcf3f86"><strong>Обязательно</strong></p></th><th data-local-id="3c2bb3ad-a730-4824-b9a3-9de731438f39" class="confluenceTh"><p local-id="e40b50a3a4fc"><strong>Описание </strong></p></th></tr><tr data-local-id="9e462e5d-4400-4f80-8a4c-80593d1abdf8"><td data-local-id="c74aeef0-5cab-4a02-a79c-c50090faa3d9" class="confluenceTd"><p local-id="d4fe097eabdd"><code>id</code></p></td><td data-local-id="24f9eaf4-5442-470d-8ca7-02a3d6ad7db5" class="confluenceTd"><p local-id="d8ec92df3dc4">integer</p></td><td data-local-id="5774e397-d9ef-4d16-8ece-d0f34ad94ea9" class="confluenceTd"><p local-id="af99c89e4b63">Да</p></td><td data-local-id="639b1132-7eb2-4f5b-9e47-02454e2dd3e2" class="confluenceTd"><p local-id="0859472bf6cc">Идентификатор доски</p></td></tr></tbody></table></div><h2 local-id="268ea7cda084" id="DELETE/api/boards/{id}-Ответ">Ответ</h2><p local-id="cec7caab9774">204 No Content: доска успешно удалена, тело ответа отсутствует.</p><h2 local-id="c1963e2461aa" id="DELETE/api/boards/{id}-Ошибки">Ошибки</h2><p local-id="8a680d7d7f04">Если доска не найдена или текущий пользователь не является ее владельцем, возникает исключение. Контроллер не преобразует эти ошибки в ответы <code>404</code> или <code>403</code>, поэтому возможна необработанная ошибка сервера.</p><h2 local-id="e81448fb8031" id="DELETE/api/boards/{id}-Примерзапроса">Пример запроса</h2><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">DELETE /api/boards/101</pre>
+</div></div><p local-id="028d4fee8f7d" />
+                    </div>
+
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on нояб. 18, 2026 16:13</p>
+                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>AVPM : POST /api/project-charters</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">AVPM</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="163939.html">Программная система управления проектной деятельностью авиапредприятий</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="491523.html">04. Функциональные модули</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="163983.html">04.01. Управление уставами проекта</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="04.01.-API_426066.html">04.01. API</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            AVPM : POST /api/project-charters
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                            
+        
+    
+        
+    
+        
+        
+            Created by <span class='author'> Екатерина Попова</span>, last modified on нояб. 14, 2026
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <p local-id="5984404dae7f">Создает черновик устава. </p><p local-id="488c1f83750c"><strong>Доступ:</strong> право <code>project_charter:manage</code>. </p><p local-id="55e07f27ea7b">Используется в <a href="14581763.html#UC-2.-%D0%A1%D0%BE%D0%B7%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5-%D1%83%D1%81%D1%82%D0%B0%D0%B2%D0%B0" data-linked-resource-id="14581763" data-linked-resource-version="5" data-linked-resource-type="page">UC-2. Создание устава</a>.</p><h2 local-id="f7558764945f" id="POST/api/project-charters-Схемаработы">Схема работы</h2><p /><h2 local-id="ad81b77a1834" id="POST/api/project-charters-Алгоритм">Алгоритм</h2><ol start="1" local-id="a86c2414-6a42-42ae-af82-606eb3dd188a"><li local-id="e0fa3c85-3c17-4cea-a221-903e2ea96fe9"><p local-id="55273a3aae41">Проверить обязательные поля, суммы и существование связанных записей: организации, проекта, шаблона, пользователей и документов. Убедиться, что выбранный шаблон не находится в архиве.</p></li><li local-id="c37bd190-a47f-4f52-93c0-25970cf2d1ff"><p local-id="e6633e7d831c">Рассчитать общий бюджет как сумму статей. Если статьи отсутствуют, использовать значение <code>budgetTotal</code>.</p></li><li local-id="a73f79c0-780b-4770-bb9c-fd92aa44cb6a"><p local-id="e85d6c0cebc2">Удалить повторяющиеся нормативные ссылки, сохранив первую ссылку на каждый документ. Добавить недостающие документы из требований выбранного шаблона.</p></li><li local-id="1521e856-9bcf-4cd3-8159-445434aa46a7"><p local-id="1922ebea1836">Создать устав со статусом <code>draft</code> и версией 1. Сохранить шаги согласования со статусом <code>waiting</code> в порядке их передачи.</p></li><li local-id="a0798879-9267-49cc-acf6-60f672a994dc"><p local-id="2cc748a05a41">Сохранить состояние устава в истории версий, добавить в журнал событие <code>created</code> и вернуть созданную карточку.</p></li></ol><h2 local-id="29a6331760fe" id="POST/api/project-charters-Входныепараметры">Входные параметры</h2><div class="table-wrap"><table data-table-width="1090" data-layout="align-start" data-local-id="647e1ba1-6aa0-46cd-ae21-2e266bf4fe7c" class="confluenceTable"><colgroup><col style="width: 204.0px;"/><col style="width: 137.0px;"/><col style="width: 141.0px;"/><col style="width: 607.0px;"/></colgroup><tbody><tr data-local-id="2be3d5d6c364"><th data-local-id="7de1fc01-f903-4977-bca3-cd065a9d6239" class="confluenceTh"><p local-id="9ec56651151c"><strong>Поле</strong></p></th><th data-local-id="56ac4e45-76d5-499e-914d-98fadb89ce25" class="confluenceTh"><p local-id="8c7d0a32fb88"><strong>Тип</strong></p></th><th data-local-id="290da598-5b15-40fe-a46d-04cb1935158d" class="confluenceTh"><p local-id="0119f850cc34"><strong>Обязательно</strong></p></th><th data-local-id="55c2be9a-2df6-4948-9528-1ebc6f1850b8" class="confluenceTh"><p local-id="a0f889bb9c9d"><strong>Описание и ограничения</strong></p></th></tr><tr data-local-id="2065b615c058"><td data-local-id="4d477e21-ea06-41c1-bcf1-e7e4cdaa058f" class="confluenceTd"><p local-id="cfa33f3362d3"><code>organizationId</code></p></td><td data-local-id="a27978a7-78d7-4ac2-899b-65dc60d93450" class="confluenceTd"><p local-id="845a301924d1">integer</p></td><td data-local-id="8fa6d3ac-7e93-4752-8ff3-e6efa800cab1" class="confluenceTd"><p local-id="c7e7e5dc8d40">Да</p></td><td data-local-id="20a66b78-8854-498a-b565-62b659171a29" class="confluenceTd"><p local-id="27cb3ddf6d99"><code>&gt; 0</code>, организация существует</p></td></tr><tr data-local-id="57d2b64fd450"><td data-local-id="cd632724-9e5d-4a9b-8b4b-7cfcb1bdce10" class="confluenceTd"><p local-id="da4cccd7afb7"><code>projectId</code></p></td><td data-local-id="b5851e01-767b-4d5c-8c64-5a1adb470e82" class="confluenceTd"><p local-id="3bb26700ac32">integer, nullable</p></td><td data-local-id="eeae1d83-fa75-4939-932e-4a7d61155214" class="confluenceTd"><p local-id="9f33f377add6">Нет</p></td><td data-local-id="46acd02c-161c-4545-b948-29607175e59f" class="confluenceTd"><p local-id="3a8e57aa6b13">Если указан, проект существует</p></td></tr><tr data-local-id="38af5e2aa3ed"><td data-local-id="3075b79f-ac19-4e85-ac47-f6700940656b" class="confluenceTd"><p local-id="c80c77ff67e6"><code>projectTemplateId</code></p></td><td data-local-id="3b816076-78fb-49ca-bdd9-3aa55b153758" class="confluenceTd"><p local-id="ac0d42dbbb86">integer, nullable</p></td><td data-local-id="db4f3e2a-5ab7-404f-b798-223be983b024" class="confluenceTd"><p local-id="5cb594c7873f">Нет</p></td><td data-local-id="39b94383b861" class="confluenceTd"><p local-id="363abb70cb93">Шаблон должен существовать и не находиться в архиве. Публикация необязательна</p></td></tr><tr data-local-id="2a04f50fe90d"><td data-local-id="26ecbf7c-6a5c-426b-9f8b-db9c0f725f18" class="confluenceTd"><p local-id="09c171be2c58"><code>responsibleUserId</code></p></td><td data-local-id="e16e94d1-a20a-4033-bd7c-8fcc842b6c3b" class="confluenceTd"><p local-id="2430db12ed90">integer, nullable</p></td><td data-local-id="90193711-2032-489f-b7da-1ed7571e98c5" class="confluenceTd"><p local-id="31a5a2ccba05">Нет</p></td><td data-local-id="22f3d0f1-1744-452c-844c-98624cad693d" class="confluenceTd"><p local-id="3b15e9549f04">Существующий пользователь</p></td></tr><tr data-local-id="aa6061f86161"><td data-local-id="8208763a-4bc3-4aea-8646-bdc5f38c45fb" class="confluenceTd"><p local-id="b8c93e58d18c"><code>name</code></p></td><td data-local-id="beb9a9c7-01ed-4031-bea4-38179b12220e" class="confluenceTd"><p local-id="59e65dedac03">string</p></td><td data-local-id="c4a1ec89-be68-4663-9e94-e497c56526ea" class="confluenceTd"><p local-id="2c31056cd43e">Да</p></td><td data-local-id="d5f9be6e-f657-4473-a5e8-f9c9b730a93c" class="confluenceTd"><p local-id="ab125c0a4388">Непустое название устава</p></td></tr><tr data-local-id="9f825496653a"><td data-local-id="c9327258-f519-4bec-96f2-ad40fee908de" class="confluenceTd"><p local-id="52c06437cf83"><code>goal</code></p></td><td data-local-id="a23ffe81-fb44-4547-9dde-863370649182" class="confluenceTd"><p local-id="7932d69b285f">string</p></td><td data-local-id="9a81b5c2-5248-44d8-b2be-576752d33a77" class="confluenceTd"><p local-id="7ab0541c5090">Да</p></td><td data-local-id="29d3a856-4abe-4f23-848d-ff241cadf52e" class="confluenceTd"><p local-id="aeb413829eb0">Непустая цель проекта</p></td></tr><tr data-local-id="08a9ea0e0850"><td data-local-id="242341b6-7119-402a-87fa-cf7c30f6c2aa" class="confluenceTd"><p local-id="7f9aad0c0dd9"><code>businessJustification</code></p></td><td data-local-id="3f1b1547-4b9c-4a0e-ad21-334f91660ee8" class="confluenceTd"><p local-id="1002cc90865c">string</p></td><td data-local-id="893fa9ce-b73d-423c-a918-535194b991e9" class="confluenceTd"><p local-id="920635ba1d19">Да</p></td><td data-local-id="ece989a5-a247-43a3-9915-1da4b88a5d0b" class="confluenceTd"><p local-id="4423d5c236dd">Непустое бизнес-обоснование</p></td></tr><tr data-local-id="1bf1b8bc179f"><td data-local-id="3b46f4bc-11ca-4f0c-8f2a-87b66a38daa8" class="confluenceTd"><p local-id="509d823e2d21"><code>budgetTotal</code></p></td><td data-local-id="c2afc985-5fd0-4174-a083-6efdf071cfd4" class="confluenceTd"><p local-id="649ac2dbd899">number</p></td><td data-local-id="007e4683-55c6-4fdc-9c21-a8fbe36dfeb5" class="confluenceTd"><p local-id="71d96241411b">Нет</p></td><td data-local-id="e11ec939-089b-407a-ac66-67498963c474" class="confluenceTd"><p local-id="b9859c452e2d"><code>&gt;= 0</code>, по умолчанию <code>0</code>. при наличии статей заменяется их суммой</p></td></tr><tr data-local-id="b5ab69f6c92f"><td data-local-id="a878635d-62e3-4f75-b9a8-e654e62ebca8" class="confluenceTd"><p local-id="eadc7e5b0241"><code>budgetItems</code></p></td><td data-local-id="c522174f-9dd6-4708-a371-66a93d59a128" class="confluenceTd"><p local-id="81d078e2032f">array</p></td><td data-local-id="9064c812-f3b1-42e1-8d86-0df513a37172" class="confluenceTd"><p local-id="d553e9027b82">Нет</p></td><td data-local-id="917792f7-98a3-44c5-9752-5f85c61d017e" class="confluenceTd"><p local-id="72107f1da24f">Статьи бюджета</p></td></tr><tr data-local-id="438b2ab173e3"><td data-local-id="7a320057-c60d-4405-b716-8cfe28c7ca05" class="confluenceTd"><p local-id="db27479a1c32"><code>milestones</code></p></td><td data-local-id="c171d201-d0ec-42fc-be3f-9ca9955b0420" class="confluenceTd"><p local-id="1b8cd9d67c0e">array</p></td><td data-local-id="42d4afd9-0fbe-485e-a63b-e4b44215db3e" class="confluenceTd"><p local-id="476dde096b7e">Нет</p></td><td data-local-id="f7eb0aa3-959b-454f-8add-a4921298fbb8" class="confluenceTd"><p local-id="e05f77586add">Этапы проекта</p></td></tr><tr data-local-id="d6333c1da67f"><td data-local-id="92173640-0b7e-4d20-9f55-1d9e43774667" class="confluenceTd"><p local-id="f2a6b97299b9"><code>regulationLinks</code></p></td><td data-local-id="a03c91a5-8005-437f-bb6f-f1e76e4b07ef" class="confluenceTd"><p local-id="b6864d7b42ef">array</p></td><td data-local-id="fac781bf-e6f3-4ca9-8b46-7153f1f676dc" class="confluenceTd"><p local-id="f757c0ee8dd8">Нет</p></td><td data-local-id="cc63aea6-e8e4-4f1c-abeb-0783c97d3f25" class="confluenceTd"><p local-id="85c4db9e556f">Нормативные ссылки</p></td></tr><tr data-local-id="4ef4e0fc890e"><td data-local-id="f05491ef-71e0-442b-8cd7-5fdaf4029da2" class="confluenceTd"><p local-id="bc52af4179ee"><code>approvalSteps</code></p></td><td data-local-id="d113ac99-c60d-4266-9c74-6630a76133ea" class="confluenceTd"><p local-id="f36aac670498">array</p></td><td data-local-id="9e0ea718-ae98-4244-80ef-f156bc63c56d" class="confluenceTd"><p local-id="4552f7417c43">Нет</p></td><td data-local-id="53ed7616-4ecc-4fbc-b8bb-b21d447eb644" class="confluenceTd"><p local-id="5ffda052bc58">Шаги маршрута согласования</p></td></tr></tbody></table></div><p local-id="9c2d4495267b">Если массивы не переданы, система использует пустые списки <code>[]</code>. Значение <code>null</code> для массивов не поддерживается. </p><p local-id="34a0d2a6be3a">API допускает создание устава без статей бюджета, этапов и шагов согласования. Стандартная форма требует заполнить хотя бы одну статью бюджета, один этап и одного согласующего.</p><h3 local-id="9e496582034f" id="POST/api/project-charters-Структураэлементовмассивов">Структура элементов массивов</h3><div class="table-wrap"><table data-table-width="1145" data-layout="align-start" data-local-id="7c88ea0d-685b-4be5-901f-3d35e37ddec1" class="confluenceTable"><colgroup><col style="width: 182.0px;"/><col style="width: 962.0px;"/></colgroup><tbody><tr data-local-id="4784f9518098"><th data-local-id="925b0a21c8b6" class="confluenceTh"><p local-id="a01045e1461d"><strong>Массив</strong></p></th><th data-local-id="122df5f3-8679-4453-9b7d-d5118ed231dd" class="confluenceTh"><p local-id="103ade6798f3"><strong>Поля</strong></p></th></tr><tr data-local-id="d0597e8f9f3f"><td data-local-id="03aaca59-3e30-453a-86b7-60ef379c9d62" class="confluenceTd"><p local-id="c0fed95d7fbe"><code>budgetItems[]</code></p></td><td data-local-id="19d7d9da-9e3f-4b13-8c8e-8109979079d6" class="confluenceTd"><p local-id="f331638a5aee">Обязательные: <code>category</code>, <code>title</code> (непустые строки), <code>amount</code> (<code>number &gt;= 0</code>, по умолчанию <code>0</code>).</p><p local-id="5bbeb569cc5b">Необязательное: <code>note</code> (string, nullable)</p></td></tr><tr data-local-id="c666e180e37a"><td data-local-id="08f014b6-60f1-47b8-90a7-c2ffcd7f472a" class="confluenceTd"><p local-id="67dd25739f00"><code>milestones[]</code></p></td><td data-local-id="de9f2d306c11" class="confluenceTd"><p local-id="4a71b0cbc69a">Обязательное: <code>title</code> (непустая строка)</p><p local-id="eea254594233">Необязательные: <code>plannedDate</code> (date-time, nullable), <code>description</code> (string, nullable)</p></td></tr><tr data-local-id="04432a6e1c6c"><td data-local-id="f8d1bca7-a356-4e7a-b177-4a0fd21e7122" class="confluenceTd"><p local-id="5470a2c460b0"><code>regulationLinks[]</code></p></td><td data-local-id="9b7a3458-c5d5-4b98-bfdb-7da9d7a00269" class="confluenceTd"><p local-id="5f2e6c145781">Обязательное: <code>regulatoryDocumentId</code> (<code>integer &gt; 0</code>).</p><p local-id="283805406d50">Необязательные: <code>clause</code>, <code>note</code> (string, nullable)</p></td></tr><tr data-local-id="dc889dc3d068"><td data-local-id="1af88ce9-6a92-4198-9796-b615891d5477" class="confluenceTd"><p local-id="5e1085d11049"><code>approvalSteps[]</code></p></td><td data-local-id="7b00c3d8-fa49-4a23-8255-dd3d46c57468" class="confluenceTd"><p local-id="cee615eb1af7">Обязательное: <code>approverUserId</code> (<code>integer &gt; 0</code>)</p><p local-id="ef26123941eb">Необязательное: <code>title</code> (непустая строка, nullable, до 256 символов)</p></td></tr></tbody></table></div><h2 local-id="5b7a6f1de545" id="POST/api/project-charters-Ответ"><strong>Ответ</strong></h2><p local-id="0bb28cf8289b">201 Created: возвращает карточку созданного устава. Заголовок <code>Location</code> содержит адрес созданного ресурса. Повторная отправка запроса создает еще один устав.</p><p local-id="3bbb69edfc76">400 Bad Request: возвращает <code>{message}</code> при незаполненных обязательных полях, отрицательных суммах, некорректных данных статей бюджета, этапов или шагов согласования, а также при отсутствии связанных записей.</p><h2 local-id="f527c3f73c70" id="POST/api/project-charters-Примерзапроса"><strong>Пример запроса</strong></h2><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">{
+  &quot;organizationId&quot;: 1,
+  &quot;name&quot;: &quot;Устав проекта модернизации&quot;,
+  &quot;goal&quot;: &quot;Подготовить проект к запуску&quot;,
+  &quot;businessJustification&quot;: &quot;Обеспечить управляемое начало работ&quot;,
+  &quot;budgetItems&quot;: [
+    {
+      &quot;category&quot;: &quot;Работы&quot;,
+      &quot;title&quot;: &quot;Подготовка&quot;,
+      &quot;amount&quot;: 1000
+    }
+  ],
+  &quot;milestones&quot;: [
+    {
+      &quot;title&quot;: &quot;Инициация&quot;
+    }
+  ],
+  &quot;regulationLinks&quot;: [],
+  &quot;approvalSteps&quot;: [
+    {
+      &quot;approverUserId&quot;: 10,
+      &quot;title&quot;: &quot;Согласование руководителем&quot;
+    }
+  ]
+}</pre>
+</div></div>
+                    </div>
+
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on нояб. 18, 2026 16:13</p>
+                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>
